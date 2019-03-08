@@ -10,7 +10,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "./src/index.html"
+      template: "./src/index.html",
     })
   ],
   devServer: {
@@ -19,6 +19,19 @@ module.exports = {
     port: 9000,
     before: function(app, server) {
       app.use("/api", express.static(path.join(__dirname, "data")));
-    }
+    },
+    disableHostCheck: true
+  },
+  module: {
+    rules: [
+      {
+        test: /templates\/.*?\.(njk|nunjucks|html|tpl|tmpl)$/,
+        use: [
+          {
+            loader: 'nunjucks-loader',
+          }
+        ]
+      }
+    ]
   }
 };
