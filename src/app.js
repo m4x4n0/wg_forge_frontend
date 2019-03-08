@@ -4,7 +4,8 @@ import orders from '../data/orders.json';
 export default (function () {
     // Lets use a template engine
     var tpl = require('./templates/app.html');
-    var content = tpl.render({ message: 'Foo that!' });
+    var styles = require('./sass/app.sass');
+    var content = tpl.render({ message: 'Foo that!', styles: styles });
 
     // console.log(html);
 
