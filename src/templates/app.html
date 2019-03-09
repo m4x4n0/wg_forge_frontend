@@ -1,4 +1,33 @@
 <style>
     {{ styles }}
 </style>
-{{ message }}
+
+<div class="page_orders__table">
+<table class="page_orders__table">
+    <thead>
+        <tr>
+            <th class="page_orders__table__head__trans_id">Transaction ID</th>
+            <th class="page_orders__table__head__user_info">User Info</th>
+            <th class="page_orders__table__head__date">Order Date</th>
+            <th class="page_orders__table__head__amount">Order Amount</th>
+            <th class="page_orders__table__head__card_number">Card Number</th>
+            <th class="page_orders__table__head__card_type">Card Type</th>
+            <th class="page_orders__table__head__location">Location</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for order in orders %}
+        <tr id="order_{{ order.id }}">
+            <td class="page_orders__table__body__trans_id">{{ order.transaction_id }}</td>
+            <td class="page_orders__table__body__user_info">{{ order.user_id}}</td>
+            <td class="page_orders__table__body__date">{{ order.created_at|format("DD/MM/YYYY hh:mm:ss") }}</td>
+            <td class="page_orders__table__body__amount">
+                <span class="page_orders__table__body__amount__currency">{{ currency }}</span>{{ order.total }}
+            </td>
+            <td class="page_orders__table__body__card_number">{{ order.card_number|shieldCard }}</td>
+            <td class="page_orders__table__body__card_type">{{ order.card_type }}</td>
+            <td class="page_orders__table__body__location">{{ order.order_country }} ({{ order.order_ip }})</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

@@ -29,6 +29,10 @@ module.exports = {
         use: [
           {
             loader: 'nunjucks-loader',
+            query: {
+              config: path.join(__dirname, 'src', 'nunjucks.config.js'),
+              quiet: true
+            }
           }
         ]
       },
