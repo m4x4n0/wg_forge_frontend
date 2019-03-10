@@ -2,6 +2,10 @@ import { getOrders } from "./getOrders";
 import { getUrlParams } from "./getUrlParams";
 import { makeUrlParams } from "./makeUrlParams";
 import { sortOrders } from "./sortOrders";
+import { statisticOrdersTotal } from "./statisticOrdersTotal";
+import { statisticOrdersMedian } from "./statisticOrdersMedian";
+import { statisticOrdersAverageCheck } from "./statisticOrdersAverageCheck";
+import { statisticOrdersAverageCheckByGender } from "./statisticOrdersAverageCheckByGender";
 
 export function viewOrders() {
     let orders = [];
@@ -24,7 +28,15 @@ export function viewOrders() {
         makeUrlParams: makeUrlParams,
         sortMode: sortMode,
         reversedSorting: 'no',
-        isSortingReversed: reversedSorting === 'yes' ? true : false
+        isSortingReversed: reversedSorting === 'yes' ? true : false,
+        statistics: {
+            ordersCount: orders.length,
+            ordersTotal: statisticOrdersTotal(orders),
+            ordersMedianValue: statisticOrdersMedian(orders),
+            ordersAverageCheck: statisticOrdersAverageCheck(orders),
+            ordersAverageCheckFemale: statisticOrdersAverageCheckByGender(orders, 'Female'),
+            ordersAverageCheckMale:  statisticOrdersAverageCheckByGender(orders, 'Male')
+        }
 
     });
 
@@ -34,9 +46,10 @@ export function viewOrders() {
             let userId = link.dataset.user_id;
 
             if (userId) {
-                let userInfo = container.querySelector(`div.page_orders__user_details[id='${userId}']`);
+                link.offsetParent.querySelectorAll(`div.page_orders__user_details[id='${userId}']`).forEach((userInfo, index, array) => {
+                    userInfo.classList.toggle("active");
+                });
                 link.classList.toggle("active");
-                userInfo.classList.toggle("active");
             }
             return false;
         }

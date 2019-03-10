@@ -62,4 +62,30 @@
         </tr>
         {% endfor %}
     </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="6">Orders Count</td>
+            <td>{{ statistics.ordersCount }}</td>
+        </tr>
+        <tr>
+            <td colspan="6">Orders Total</td>
+            <td>{{ currencySymbol }} {{ statistics.ordersTotal | round(2) }}</td>
+        </tr>
+        <tr>
+            <td colspan="6">Median Value</td>
+            <td>{{ currencySymbol }} {{ statistics.ordersMedianValue | round(2) }}</td>
+        </tr>
+        <tr>
+            <td colspan="6">Average Check</td>
+            <td>{{ currencySymbol }} {{ statistics.ordersAverageCheck | round(2) }}</td>
+        </tr>
+        <tr>
+            <td colspan="6">Average Check (Female)</td>
+            <td>{{ currencySymbol }} {{ statistics.ordersAverageCheckFemale | round(2) }}</td>
+        </tr>
+        <tr>
+            <td colspan="6">Average Check (Male)</td>
+            <td>{{ currencySymbol }} {{ statistics.ordersAverageCheckMale | round(2) }}</td>
+        </tr>
+    </tfoot>
 </table>
