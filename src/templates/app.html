@@ -5,6 +5,11 @@
 <div class="page_orders__table">
 <table class="page_orders__table">
     <thead>
+        <tr class="page_orders__table__head__search">
+            <th>Search:</th>
+            <th colspan="6"><input type="text" id="search" value="{{ searchString }}"></th>
+        </tr>
+        {% if orders.length %}
         <tr>
             <th class="page_orders__table__head__trans_id{% if sortMode == 'transaction_id' %} active{% if isSortingReversed %} reversed{% endif %}{% endif %}">
                 <a href="{{ makeUrlParams({sort:'transaction_id', reversed: reversedSorting}) }}" title="Sort by Transaction ID">Transaction ID</a>
@@ -34,6 +39,7 @@
                 {% if sortMode == 'location' %} <span>&#8595;</span>{% endif %}
             </th>
         </tr>
+        {% endif %}
     </thead>
     <tbody>
         {% for order in orders %}
@@ -60,8 +66,13 @@
             <td class="page_orders__table__body__card_type">{{ order.card_type }}</td>
             <td class="page_orders__table__body__location">{{ order.order_country }} ({{ order.order_ip }})</td>
         </tr>
+        {% else %}
+        <tr>
+            <td colspan="7">Nothing found</td>
+        </tr>
         {% endfor %}
     </tbody>
+    {% if orders.length %}
     <tfoot>
         <tr>
             <td colspan="6">Orders Count</td>
@@ -88,4 +99,5 @@
             <td>{{ currencySymbol }} {{ statistics.ordersAverageCheckMale | round(2) }}</td>
         </tr>
     </tfoot>
+    {% endif %}
 </table>

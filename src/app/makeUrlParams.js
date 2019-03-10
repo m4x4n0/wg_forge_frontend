@@ -11,7 +11,6 @@ export function makeUrlParams(add={}, remove={}) {
 
     if (urlOriginalSearchParams.has('sort') && urlOriginalSearchParams.get('sort') === add.sort) {
         let reversed = urlOriginalSearchParams.get('reversed');
-        console.log(reversed);
         urlSearchParams.delete('reversed');
         urlSearchParams.set('reversed', reversed === 'yes' ? 'no' : 'yes');
     }

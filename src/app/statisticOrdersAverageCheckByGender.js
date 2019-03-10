@@ -8,5 +8,5 @@ export function statisticOrdersAverageCheckByGender(orders, gender) {
             ordersLength += 1;
         }
     });
-    return ordersTotal / ordersLength;
+    return ordersTotal / ordersLength || 0;
 }
