@@ -20,11 +20,21 @@
         <tr id="order_{{ order.id }}">
             <td class="page_orders__table__body__trans_id">{{ order.transaction_id }}</td>
             <td class="page_orders__table__body__user_info" data-userId="{{ order.user_id}}">
-                <a href="#" title="{{ order.user.getUserNameWithPrefix() }}">{{ order.user.getUserNameWithPrefix() }}</a>
+                <a href="#" title="{{ order.user.getUserNameWithPrefix() }}" class="page_orders__user_details__link" data-user_id="{{ order.user_id }}">{{ order.user.getUserNameWithPrefix() }}</a>
+                <div class="page_orders__user_details user-details" id="{{ order.user_id }}">
+                    <p>Birthday: {{ order.user.birthday|format("DD/MM/YYYY")}}</p>
+                    {% if order.user.avatar %}<p><img src="{{ order.user.avatar }}" class="page_orders__user_details__image"></p>{% endif %}
+                    <p>Company: <a href="{{ order.user.company.url }}" title="{{ order.user.company.title }}" target="_blank">{{ order.user.company.title }}</a></p>
+                    {% if order.user.company.industry or order.user.company.sector %}
+                    <p>Industry: {{ order.user.company.industry }} 
+                    {% if order.user.company.industry and order.user.company.sector %} / {% endif %}
+                    {{ order.user.company.sector }}</p>
+                    {% endif %}
+                </div>
             </td>
             <td class="page_orders__table__body__date">{{ order.created_at|format("DD/MM/YYYY hh:mm:ss") }}</td>
             <td class="page_orders__table__body__amount">
-                <span class="page_orders__table__body__amount__currency">{{ currency }}</span>{{ order.total }}
+                <span class="page_orders__table__body__amount__currency">{{ currencySymbol }}</span>{{ order.total }}
             </td>
             <td class="page_orders__table__body__card_number">{{ order.card_number|shieldCard }}</td>
             <td class="page_orders__table__body__card_type">{{ order.card_type }}</td>

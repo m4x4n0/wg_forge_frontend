@@ -1,11 +1,40 @@
 body
     font: 400 17px Arial
+    color: #333
+
+a
+    color: #548eaa
+    &:hover
+        color: #487284
+
+td, th
+    padding: 3px 10px
+    border: solid 1px #D5DDDF
+    text-align: left
 
 .page_orders
     &__table
         border-spacing: 0
         border-collapse: separate
 
-        td, th
-            padding: 3px 10px
-            border: solid 1px #999
+        &__body
+
+            &__amount
+                text-align: right
+
+    &__user_details
+        max-height: 0
+        overflow-y: hidden;
+        transition: all .5s ease-in
+
+        &.active
+            max-height: 400px
+            transition: all 1s ease-out
+
+        &__link
+            &.active
+                color: #6ab5d5
+
+        &__image
+            width: 100px
+            height: 100px

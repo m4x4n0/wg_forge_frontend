@@ -15,4 +15,17 @@ export function renderTable() {
         currencySymbol: currencySymbol
     });
 
+    // Hide or unhide an user detailed information
+    container.querySelectorAll('a.page_orders__user_details__link').forEach((link, index, array) => {
+        link.onclick = (e) => {
+            let userId = link.dataset.user_id;
+
+            if (userId) {
+                let userInfo = container.querySelector(`div.page_orders__user_details[id='${userId}']`);
+                link.classList.toggle("active");
+                userInfo.classList.toggle("active");
+            }
+        }
+    });
+
 }
