@@ -17,6 +17,13 @@ td, th
         border-spacing: 0
         border-collapse: separate
 
+        thead
+            th.reversed
+                span
+                    transform: scaleY(-1)
+                    display: inline-block
+                    vertical-align: middle
+
         &__body
 
             &__amount
@@ -34,6 +41,8 @@ td, th
         &__link
             &.active
                 color: #6ab5d5
+                cursor: hand
+                c\ursor: pointer
 
         &__image
             width: 100px

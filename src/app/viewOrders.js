@@ -1,18 +1,31 @@
 import { getOrders } from "./getOrders";
+import { getUrlParams } from "./getUrlParams";
+import { makeUrlParams } from "./makeUrlParams";
+import { sortOrders } from "./sortOrders";
 
-export function renderTable() {
+export function viewOrders() {
     let orders = [];
     let tpl = require('../templates/app.html');
     let styles = require('../sass/app.sass');
     let currencySymbol = "$";
     let container = document.getElementById("app");
+    let urlSearchParams = getUrlParams();
+    let sortMode = urlSearchParams.get('sort');
+    let reversedSorting = urlSearchParams.get('reversed');
 
     orders = getOrders();
+    orders = sortOrders(orders, sortMode, reversedSorting === 'yes' ? true : false);
 
     container.innerHTML = tpl.render({ 
         styles: styles,
         orders: orders,
-        currencySymbol: currencySymbol
+        currencySymbol: currencySymbol,
+        getUrlParams: getUrlParams,
+        makeUrlParams: makeUrlParams,
+        sortMode: sortMode,
+        reversedSorting: 'no',
+        isSortingReversed: reversedSorting === 'yes' ? true : false
+
     });
 
     // Hide or unhide an user detailed information
@@ -25,6 +38,7 @@ export function renderTable() {
                 link.classList.toggle("active");
                 userInfo.classList.toggle("active");
             }
+            return false;
         }
     });
 

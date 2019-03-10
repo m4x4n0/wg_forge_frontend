@@ -6,13 +6,33 @@
 <table class="page_orders__table">
     <thead>
         <tr>
-            <th class="page_orders__table__head__trans_id">Transaction ID</th>
-            <th class="page_orders__table__head__user_info">User Info</th>
-            <th class="page_orders__table__head__date">Order Date</th>
-            <th class="page_orders__table__head__amount">Order Amount</th>
-            <th class="page_orders__table__head__card_number">Card Number</th>
-            <th class="page_orders__table__head__card_type">Card Type</th>
-            <th class="page_orders__table__head__location">Location</th>
+            <th class="page_orders__table__head__trans_id{% if sortMode == 'transaction_id' %} active{% if isSortingReversed %} reversed{% endif %}{% endif %}">
+                <a href="{{ makeUrlParams({sort:'transaction_id', reversed: reversedSorting}) }}" title="Sort by Transaction ID">Transaction ID</a>
+                {% if sortMode == 'transaction_id' %} <span>&#8595;</span>{% endif %}
+            </th>
+            <th class="page_orders__table__head__user_info{% if sortMode == 'user_info' %} active{% if isSortingReversed %} reversed{% endif %}{% endif %}">
+                <a href="{{ makeUrlParams({sort:'user_info', reversed: reversedSorting}) }}" title="Sort by User Info">User Info</a>
+                {% if sortMode == 'user_info' %} <span>&#8595;</span>{% endif %}
+            </th>
+            <th class="page_orders__table__head__date{% if sortMode == 'order_date' %} active{% if isSortingReversed %} reversed{% endif %}{% endif %}">
+                <a href="{{ makeUrlParams({sort:'order_date', reversed: reversedSorting}) }}" title="Sort by Order Date">Order Date</a>
+                {% if sortMode == 'order_date' %} <span>&#8595;</span>{% endif %}
+            </th>
+            <th class="page_orders__table__head__amount{% if sortMode == 'order_amount' %} active{% if isSortingReversed %} reversed{% endif %}{% endif %}">
+                <a href="{{ makeUrlParams({sort:'order_amount', reversed: reversedSorting}) }}" title="Sort by Order Amount">Order Amount</a>
+                {% if sortMode == 'order_amount' %} <span>&#8595;</span>{% endif %}
+            </th>
+            <th class="page_orders__table__head__card_number">
+                Card Number
+            </th>
+            <th class="page_orders__table__head__card_type{% if sortMode == 'card_type' %} active{% if isSortingReversed %} reversed{% endif %}{% endif %}">
+                <a href="{{ makeUrlParams({sort:'card_type', reversed: reversedSorting}) }}" title="Sort by Card Type">Card Type</a>
+                {% if sortMode == 'card_type' %} <span>&#8595;</span>{% endif %}
+            </th>
+            <th class="page_orders__table__head__location{% if sortMode == 'location' %} active{% if isSortingReversed %} reversed{% endif %}{% endif %}">
+                <a href="{{ makeUrlParams({sort:'location', reversed: reversedSorting}) }}" title="Sort by Location">Location</a>
+                {% if sortMode == 'location' %} <span>&#8595;</span>{% endif %}
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -20,7 +40,7 @@
         <tr id="order_{{ order.id }}">
             <td class="page_orders__table__body__trans_id">{{ order.transaction_id }}</td>
             <td class="page_orders__table__body__user_info" data-userId="{{ order.user_id}}">
-                <a href="#" title="{{ order.user.getUserNameWithPrefix() }}" class="page_orders__user_details__link" data-user_id="{{ order.user_id }}">{{ order.user.getUserNameWithPrefix() }}</a>
+                <a href="" title="{{ order.user.getUserNameWithPrefix() }}" class="page_orders__user_details__link" data-user_id="{{ order.user_id }}">{{ order.user.getUserNameWithPrefix() }}</a>
                 <div class="page_orders__user_details user-details" id="{{ order.user_id }}">
                     <p>Birthday: {{ order.user.birthday|format("DD/MM/YYYY")}}</p>
                     {% if order.user.avatar %}<p><img src="{{ order.user.avatar }}" class="page_orders__user_details__image"></p>{% endif %}
