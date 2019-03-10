@@ -19,7 +19,9 @@
         {% for order in orders %}
         <tr id="order_{{ order.id }}">
             <td class="page_orders__table__body__trans_id">{{ order.transaction_id }}</td>
-            <td class="page_orders__table__body__user_info">{{ order.user_id}}</td>
+            <td class="page_orders__table__body__user_info" data-userId="{{ order.user_id}}">
+                <a href="#" title="{{ order.user.getUserNameWithPrefix() }}">{{ order.user.getUserNameWithPrefix() }}</a>
+            </td>
             <td class="page_orders__table__body__date">{{ order.created_at|format("DD/MM/YYYY hh:mm:ss") }}</td>
             <td class="page_orders__table__body__amount">
                 <span class="page_orders__table__body__amount__currency">{{ currency }}</span>{{ order.total }}
