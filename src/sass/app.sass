@@ -37,6 +37,7 @@ input[type='text']
 
         &__head
             &__search
+            &__rates
         &__body
 
             &__amount
@@ -49,6 +50,20 @@ input[type='text']
                 border: solid 1px #eee
                 padding: 10px
 
+    &__rate
+        &__link
+            display: inline-block
+            padding: 5px 10px
+            font-size: 12px
+            font-weight: normal
+            text-decoration: none
+            border: solid 1px 
+            border-radius: 3px
+            margin-bottom: 3px
+
+            &.active
+                background: #548eaa
+                color: #fff
 
     &__user_details
         max-height: 0

@@ -5,6 +5,14 @@
 <div class="page_orders__table">
 <table class="page_orders__table">
     <thead>
+        <tr class="page_orders__table__head__rates">
+            <th>Rates:</th>
+            <th colspan="6">
+                {% for symbol,rate in rates.rates %}
+                <a href="{{ makeUrlParams({rate:symbol}) }}" class="page_orders__rate__link{% if currentRate === symbol %} active{% endif %}">{{ symbol }}</a>
+                {% endfor %}
+            </th>
+        </tr>
         <tr class="page_orders__table__head__search">
             <th>Search:</th>
             <th colspan="6"><input type="text" id="search" value="{{ searchString }}"></th>
@@ -60,7 +68,7 @@
             </td>
             <td class="page_orders__table__body__date">{{ order.created_at|format("DD/MM/YYYY hh:mm:ss") }}</td>
             <td class="page_orders__table__body__amount">
-                <span class="page_orders__table__body__amount__currency">{{ currencySymbol }}</span>{{ order.total }}
+                {{ getPrice(order.total) | round(2) }} <span class="page_orders__table__body__amount__currency">{{ currentRate }}</span>
             </td>
             <td class="page_orders__table__body__card_number">{{ order.card_number|shieldCard }}</td>
             <td class="page_orders__table__body__card_type">{{ order.card_type }}</td>
@@ -80,23 +88,23 @@
         </tr>
         <tr>
             <td colspan="6">Orders Total</td>
-            <td>{{ currencySymbol }} {{ statistics.ordersTotal | round(2) }}</td>
+            <td>{{ getPrice(statistics.ordersTotal) | round(2) }} {{ currentRate }}</td>
         </tr>
         <tr>
             <td colspan="6">Median Value</td>
-            <td>{{ currencySymbol }} {{ statistics.ordersMedianValue | round(2) }}</td>
+            <td>{{ getPrice(statistics.ordersMedianValue) | round(2) }} {{ currentRate }}</td>
         </tr>
         <tr>
             <td colspan="6">Average Check</td>
-            <td>{{ currencySymbol }} {{ statistics.ordersAverageCheck | round(2) }}</td>
+            <td>{{ getPrice(statistics.ordersAverageCheck) | round(2) }} {{ currentRate }}</td>
         </tr>
         <tr>
             <td colspan="6">Average Check (Female)</td>
-            <td>{{ currencySymbol }} {{ statistics.ordersAverageCheckFemale | round(2) }}</td>
+            <td>{{ getPrice(statistics.ordersAverageCheckFemale) | round(2) }} {{ currentRate }}</td>
         </tr>
         <tr>
             <td colspan="6">Average Check (Male)</td>
-            <td>{{ currencySymbol }} {{ statistics.ordersAverageCheckMale | round(2) }}</td>
+            <td>{{ getPrice(statistics.ordersAverageCheckMale) | round(2) }} {{ currentRate }}</td>
         </tr>
     </tfoot>
     {% endif %}

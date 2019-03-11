@@ -1,4 +1,4 @@
-moment = require("moment");
+var moment = require("moment");
 
 module.exports = function(env){
 

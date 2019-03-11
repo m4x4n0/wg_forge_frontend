@@ -7,9 +7,11 @@ import { statisticOrdersTotal } from "./statisticOrdersTotal";
 import { statisticOrdersMedian } from "./statisticOrdersMedian";
 import { statisticOrdersAverageCheck } from "./statisticOrdersAverageCheck";
 import { statisticOrdersAverageCheckByGender } from "./statisticOrdersAverageCheckByGender";
+import { getRates } from "./getRates";
+import { getPrice } from "./getPrice";
 
 export function viewOrders() {
-    let orders = [];
+    let orders, rates;
     let tpl = require('../templates/app.html');
     let styles = require('../sass/app.sass');
     let currencySymbol = "$";
@@ -18,11 +20,14 @@ export function viewOrders() {
     let sortMode = urlSearchParams.get('sort');
     let reversedSorting = urlSearchParams.get('reversed');
     let searchString = urlSearchParams.get('search');
+    let currentRate = urlSearchParams.get('rate') || "USD";
     searchString = searchString ? searchString : "";
 
     orders = getOrders();
     orders = sortOrders(orders, sortMode, reversedSorting === 'yes' ? true : false);
     orders = filterOrders(orders, searchString);
+
+    rates = getRates();
 
     container.innerHTML = tpl.render({ 
         styles: styles,
@@ -41,8 +46,10 @@ export function viewOrders() {
             ordersAverageCheck: statisticOrdersAverageCheck(orders),
             ordersAverageCheckFemale: statisticOrdersAverageCheckByGender(orders, 'Female'),
             ordersAverageCheckMale:  statisticOrdersAverageCheckByGender(orders, 'Male')
-        }
-
+        },
+        rates: rates,
+        currentRate: currentRate,
+        getPrice: getPrice
     });
 
     // Hide or unhide an user detailed information
