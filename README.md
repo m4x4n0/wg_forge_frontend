@@ -11,9 +11,6 @@
 
 ![Поиск по числу 317](https://raw.githubusercontent.com/m4x4n0/wg_forge_frontend/master/2019-03-12_224037.png "Поиск по числу 317")
 
-### TODO
-Формировать цену при выборке заказов.
-
 <details><summary>Детали задания</summary>
 
 # Тестовое задание WG Forge Platform Front-End
