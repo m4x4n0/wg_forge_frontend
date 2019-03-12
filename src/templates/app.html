@@ -68,7 +68,7 @@
             </td>
             <td class="page_orders__table__body__date">{{ order.created_at|format("DD/MM/YYYY hh:mm:ss") }}</td>
             <td class="page_orders__table__body__amount">
-                {{ getPrice(order.total) | round(2) }} <span class="page_orders__table__body__amount__currency">{{ currentRate }}</span>
+                {{ order.total  }} <span class="page_orders__table__body__amount__currency">{{ currentRate }}</span>
             </td>
             <td class="page_orders__table__body__card_number">{{ order.card_number|shieldCard }}</td>
             <td class="page_orders__table__body__card_type">{{ order.card_type }}</td>
@@ -88,23 +88,23 @@
         </tr>
         <tr>
             <td colspan="6">Orders Total</td>
-            <td>{{ getPrice(statistics.ordersTotal) | round(2) }} {{ currentRate }}</td>
+            <td>{{ getPrice(statistics.ordersTotal) }} {{ currentRate }}</td>
         </tr>
         <tr>
             <td colspan="6">Median Value</td>
-            <td>{{ getPrice(statistics.ordersMedianValue) | round(2) }} {{ currentRate }}</td>
+            <td>{{ getPrice(statistics.ordersMedianValue) }} {{ currentRate }}</td>
         </tr>
         <tr>
             <td colspan="6">Average Check</td>
-            <td>{{ getPrice(statistics.ordersAverageCheck) | round(2) }} {{ currentRate }}</td>
+            <td>{{ getPrice(statistics.ordersAverageCheck) }} {{ currentRate }}</td>
         </tr>
         <tr>
             <td colspan="6">Average Check (Female)</td>
-            <td>{{ getPrice(statistics.ordersAverageCheckFemale) | round(2) }} {{ currentRate }}</td>
+            <td>{{ getPrice(statistics.ordersAverageCheckFemale) }} {{ currentRate }}</td>
         </tr>
         <tr>
             <td colspan="6">Average Check (Male)</td>
-            <td>{{ getPrice(statistics.ordersAverageCheckMale) | round(2) }} {{ currentRate }}</td>
+            <td>{{ getPrice(statistics.ordersAverageCheckMale) }} {{ currentRate }}</td>
         </tr>
     </tfoot>
     {% endif %}
